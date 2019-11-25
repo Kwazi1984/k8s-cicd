@@ -17,6 +17,13 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to Kubernetes'){
+            stpes{
+                sh "chmod +x changeTag.sh"
+                sh "./changeTag.sh ${DOCKER_TAG}"
+                sh "kubectl apply -n cicd -f services.yml node-app-pod.yml"
+            }
+        }
     }
 }
 
