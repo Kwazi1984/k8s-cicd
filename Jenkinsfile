@@ -21,7 +21,9 @@ pipeline {
             steps{
                 sh "chmod +x changeTag.sh"
                 sh "./changeTag.sh ${DOCKER_TAG}"
-                sh "kubectl apply -n cicd -f services.yml node-app-pod.yml"
+                withKubeConfig([credentialsId: 'deployer', serverUrl: 'https://10.0.2.15:8443']) {
+                    sh "kubectl apply -n cicd -f services.yml node-app-pod.yml"
+                }               
             }
         }
     }
