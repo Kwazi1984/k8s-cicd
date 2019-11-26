@@ -21,7 +21,7 @@ pipeline {
             steps{
                 sh "chmod +x changeTag.sh"
                 sh "./changeTag.sh ${DOCKER_TAG}"
-                sh "sshpass -p ubutnu ssh ubuntu@10.0.2.15 'kubectl version"
+                sh "sshpass -p ubutnu ssh ubuntu@10.0.2.15 'kubectl version'"
                 //sh "kubectl apply -n cicd -f services.yml node-app-pod.yml"              
             }
         }
