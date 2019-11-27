@@ -21,8 +21,9 @@ pipeline {
             steps{
                 sh "chmod +x changeTag.sh"
                 sh "./changeTag.sh ${DOCKER_TAG}"
-                sh "ssh ubuntu@10.0.2.15 'kubectl version'"
-                //sh "kubectl apply -n cicd -f services.yml node-app-pod.yml"              
+                sshagent(['kops-machine']) {
+                    sh "ssh ubuntu@10.0.2.15 kubectl version"
+                }        
             }
         }
     }
