@@ -22,7 +22,7 @@ pipeline {
                 sh "chmod +x changeTag.sh"
                 sh "./changeTag.sh ${DOCKER_TAG}"
                 sshagent(['kops-machine']) {
-                    sh "ssh ubuntu@10.0.2.15 kubectl version"
+                    sh "ssh -o StrictHostKeyChecking=no ubuntu@10.0.2.15 kubectl version"
                 }        
             }
         }
